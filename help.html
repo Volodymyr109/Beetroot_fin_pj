@@ -1,0 +1,267 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+
+
+
+
+
+
+<header>
+                <div class="header_inner">
+                    <form action="search" method="POST">
+                    {% csrf_token %}
+                    <div class="left-side">
+                        <!-- Logo -->
+                        <div id="logo" class=" uk-hidden@s">
+                            <a href="home.html">
+                                <b><h1 style="text-transform: uppercase;">Social Book</h1></b>
+                            </a>
+                        </div>
+
+                        <!--<div class="triger" uk-toggle="target: #wrapper ; cls: sidebar-active">
+                            <i class="uil-bars"></i>
+                        </div>-->
+
+                        <!-- <div class="header_search"> -->
+                            <input type="text" name="username" placeholder="Search for username..">&nbsp; &nbsp;
+                            <button type="submit"><i class="fa fa-search fa-1x"></i></button>
+                        <!-- </div> -->
+
+                    </div>
+                    </form>
+                    <div class="right-side lg:pr-4">
+                         <!-- upload -->
+                        <a href="#"
+                            class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
+                            <ion-icon name="add-circle" class="-mb-1
+                             mr-1 opacity-90 text-xl uilus-circle"></ion-icon> Upload Pics
+                        </a>
+                         <!-- upload dropdown box -->
+                        <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" class="header_dropdown">
+
+                            <!-- notivication header -->
+                            <div class="px-4 py-3 -mx-5 -mt-4 mb-5 border-b">
+                                <h4>Upload Pics</h4>
+                            </div>
+
+                            <!-- notification contents -->
+                            <div class="flex justify-center flex-center text-center">
+
+                                <div class="flex flex-col choose-upload text-center">
+
+                                    <div class="bg-gray-100 border-2 border-dashed flex flex-col h-24 items-center justify-center relative w-full rounded-lg  ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-12">
+                                            <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                                            <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                                        </svg>
+                                    </div>
+
+                                    <form action="upload" method="POST" enctype="multipart/form-data" >
+                                    {% csrf_token %}
+                                    <p class="my-3 leading-6"> Upload pics
+                                    </p>
+                                    <div>
+                                        <input type="file" name="image_upload">
+                                        <!-- <a href="#" class="button soft-warning small"> Choose file</a> -->
+                                        <textarea class="button soft-warning small" name="caption" placeholder="caption..." ></textarea>
+                                        <br>
+                                        <button class="button bg-blue-700" type="submit" >Upload</button>
+                                    </div>
+                                    </form>
+
+                                    <!-- <a href="#" class="uk-text-muted mt-3 uk-link"
+                                        uk-toggle="target: .choose-upload ;  animation: uk-animation-slide-right-small, uk-animation-slide-left-medium; queued: true">
+                                        Or Import Video </a> -->
+                                </div>
+
+                                <div class="uk-flex uk-flex-column choose-upload" hidden>
+                                    <div class="mx-auto flex flex-col h-24 items-center justify-center relative w-full rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-12">
+                                            <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <p class="my-3 leading-6"> Import videos from YouTube <br> Copy / Paste your video link here </p>
+                                    <form class="uk-grid-small" uk-grid>
+                                        <div class="uk-width-expand">
+                                            <input type="text" class="uk-input uk-form-small  bg-gray-200 " style="box-shadow:none" placeholder="Paste link">
+                                        </div>
+                                        <div class="uk-width-auto"> <button type="submit" class="button soft-warning -ml-2">
+                                                Import </button> </div>
+                                    </form>
+                                    <a href="#" class="uk-text-muted mt-3 uk-link"
+                                        uk-toggle="target: .choose-upload ; animation: uk-animation-slide-left-small, uk-animation-slide-right-medium; queued: true">
+                                        Or Upload Video </a>
+                                </div>
+
+                            </div>
+                            <div class="px-4 py-3 -mx-5 -mb-4 mt-5 border-t text-sm">
+                                Your Post size Must be Maxmium 999MB
+                            </div>
+                        </div>
+
+
+                         <!-- Notification -->
+                         <!-- Notification -->
+                         <!-- Notification -->
+                        <a href="#" class="header-links-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none"><path d="M12 22a2.02 2.02 0 0 1-2.01-2h4a2.02 2.02 0 0 1-.15.78a2.042 2.042 0 0 1-1.44 1.18h-.047A1.922 1.922 0 0 1 12 22zm8-3H4v-2l2-1v-5.5a8.065 8.065 0 0 1 .924-4.06A4.654 4.654 0 0 1 10 4.18V2h4v2.18c2.579.614 4 2.858 4 6.32V16l2 1v2z" fill="currentColor"/></g></svg>
+                        </a>
+                        <div uk-drop="mode: click;offset: 4" class="header_dropdown">
+                            <h4
+                                class="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
+                                Notification </h4>
+                            <ul class="dropdown_scrollbar" data-simplebar>
+                                <li>
+                                    <a href="#">
+                                        <div class="drop_avatar"> <img src="{{user_profile.profileimg.url}}" alt="">
+                                        </div>
+                                        <div class="drop_content">
+                                            <p> <strong class="text-link" >Username</strong>
+                                                <span class="text-link"> is following you  </span>
+                                            </p>
+                                            <span class="time-ago"> Time (time ago) </span>
+                                        </div>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                            <a href="#" class="see-all">See all</a>
+                        </div>
+
+
+                        <!-- Messages -->
+                        <!-- Messages -->
+                        <!-- Messages -->
+                        <a href="#" class="header-links-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="0.5em" height="0.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/></g></svg>
+                        </a>
+                        <div uk-drop="mode: click;offset: 4" class="header_dropdown">
+                            <h4
+                                class="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
+                                Messages </h4>
+                            <ul class="dropdown_scrollbar" data-simplebar>
+                                <li>
+                                    <a href="#">
+                                        <div class="drop_avatar"> <img src="{{user_profile.profileimg.url}}" alt="">
+                                        </div>
+                                        <div class="drop_content">
+                                            <strong> Username </strong> <time> 6:43 PM</time>
+                                            <p> Message </p>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <a href="#" class="see-all">See all</a>
+                        </div>
+
+
+                        <!-- profile -->
+                        <!-- profile -->
+                        <!-- profile -->
+                        <a href="#">
+                            <img src="{{user_profile.profileimg.url}}" class="header-avatar" alt="">
+                        </a>
+                        <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                            <ul>
+                                <li><a href="/settings"> Account setting </a> </li>
+                                <li><a href="/help"> Help </a> </li>
+                                <li><a href="logout"> Log Out</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </header>
+
+
+                        <!-- main -->
+                        <!-- main -->
+                        <!-- main -->
+
+<main id="main"><header class="ba-content-header"><div class="ba-content-wrap"><nav class="ba-breadcrumb" aria-label="Du befindest Dich hier:"><ol><li><a href="https://www.arbeitsagentur.de" title="Startseite">Startseite</a></li><li><span class="visually-hidden">aktuelle Seite: </span>Hilfe</li></ol></nav><h1>Information und Hilfe</h1><p>Benutzerhinweise zum Internetportal der Bundesagentur für Arbeit</p></div></header><div class="container-fluid"><article class="row ba-richtext-content ba-copytext  "><div class="ba-content-main"><h2>Browserkompatibilität</h2><p>Beim Einsatz unterschiedlicher Browser für das Internet und aufgrund unterschiedlicher Software-Einstellungen kann es bei der Darstellung der Daten zu Abweichungen kommen.<br>&nbsp;<br>Unsere Internetseiten sind optimiert für die Browser</p><ul><li>Mozilla Firefox 109</li><li>Safari 16</li><li>Google Chrome 109</li><li>Edge Chromium 109</li></ul><p>Bei anderen Browsern, die Cascading Style Sheets CSS3 und HTML5 unterstützen, sollten keine Probleme bei der Darstellung auftreten.<br><br>Ältere Browser-Versionen sind grundsätzlich nutzbar, doch kann es zu grafischen Abweichungen in der Anzeige von Schriften und Styles und zu Einschränkungen ausgewählter Funktionen kommen. Wir bitten um Ihr Verständnis.</p><h2>Darstellung auf unterschiedlichen Endgeräten</h2><p>Um den Anwendern die bestmöglichste Darstellung zu gewährleisten, wurden unsere Seiten für folgende Ausgabemedien und Auflösungen optimiert:</p><ul><li>Smartphone (Breite 320px)</li><li>Tablet (Breite 768px)</li><li>Monitor 15 Zoll (Breite 1024px)</li><li>Monitor 17/19 Zoll (Breite 1280px)</li><li>Breitbildmonitor (Breite größer/gleich 1440px)</li></ul><p>Entsprechend des verwendeten Endgerätes kann die Darstellung der jeweiligen Seitenbereiche (Tabellen, Bilder, Spalten, Navigation, etc.) variieren.&nbsp;&nbsp;</p><h2>Darstellungsgröße und Schrift</h2><p>Um die Darstellungsgröße in Ihrem Browser zu verändern, halten Sie die Taste "Strg" gedrückt und bewegen das Scrollrad auf der Maus oder halten Sie die Taste "Strg" gedrückt und verwenden die "Plus"-Taste zum Vergrößern oder die "Minus"-Taste zum Verkleinern. Dadurch werden alle Seitenelemente (auch die Schriften) in ihrer Größe nach Ihren Wünschen angepasst.</p><p>Eine alternative Möglichkeit, nur die Schriftgröße über die für jeden Browser spezifisch anpassbaren Einstellungen zu verändern, wird nicht angeboten. Weitere Erläuterungen erhalten Sie in der Hilfe zu Ihrem Browser.</p><p>Viele Betriebssysteme bieten eine verbesserte Schriftendarstellung durch eine sogenannte Kantenglättung der Schriftzeichen an.</p><p>Um beispielsweise die Kantenglättung von Schriften unter Windows zu aktivieren, stellt man unter Systemsteuerung &gt; Anzeige &gt; Darstellung &gt; Effekte &gt; Cleartype-Textdarstellung ein. Bei Mac OS X gehört die Kantenglättung zum Standard. Die Möglichkeiten der systemweiten Einstellung für andere Betriebssysteme entnehmen Sie bitten den entsprechenden Handbüchern.</p><h2>Zusätzliche Hilfen</h2><p>Neben dieser Hilfeseite mit allgemeinen Informationen werden auf jeder Seite der Bundesagentur für Arbeit zusätzliche, dem jeweiligen Inhalt entsprechende, Hinweise und Erklärungen zu</p><ul><li>verwendeten Bedienelementen</li><li>Eingabe-Hilfen</li><li>allgemeinen Funktionen</li><li>erwarteten Inhalten</li></ul><p>in Form&nbsp;</p><ul><li>eines Icons, das eine Textbox mit spezielle Hinweisen und Hilfen für die betreffende Komponente öffnet</li><li>Tooltips, die beim Überfahren mit der Maus für das jeweilige Seitenelement angezeigt werden</li><li>definierte Hinweisboxen, die in Abhängigkeit bestimmter Systemereignisse /-situationen angezeigt werden</li><li>komplette Hinweis- oder Fehlerseiten in einem separaten Fenster</li></ul><h2>Barrierefreiheit</h2><p>Die Internetseiten der Bundesagentur für Arbeit entsprechen den Richtlinien der Barrierefreien Informationstechnik-Verordnung (BITV). Hinweise zu den von Ihrem Gerät unterstützten Screenreadern, deren Konfiguration und Einsatzbedingungen entnehmen Sie bitte den Hilfeseiten Ihres Betriebssystems. Aktuell werden unsere Internetangebote mit dem Screenreader JAWS getestet. Weitere Hinweise hinsichtlich der Vereinbarkeit mit der BITV finden Sie in der&nbsp;<a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="037ec563-083b-4e37-9fd4-ee2e15ded215" href="/erklaerung-barrierefreiheit">Erklärung zur Barrierefreiheit</a>.<br><br>Hörbehinderte, welche die Deutschen Gebärdensprache nutzen möchten, erhalten über den Verweis "<a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b0e491b0-b9d8-43b6-aafd-81f75c25e875" href="/gebaerdensprache">Gebärdensprache</a>" in der Service-Navigation eine visuelle Einführung zur Nutzung und Orientierung der Internetseiten der Bundesagentur für Arbeit in Form eines Videos. Bei der Nutzung älterer Browser muss für das Abspielen der Videos ggf. der Adobe Flash Player auf Ihrem PC installiert sein.<br>Einen Überblick über unser Internet-Angebot bieten wir darüber hinaus auch in&nbsp;<a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5f5c8932-29f2-4181-b932-cddf78fa3b41" href="/leichte-sprache">Leichter Sprache</a>&nbsp;an.</p><h2>Anzeige und Download von PDF-Dateien&nbsp;</h2><p>Zum Öffnen der auf unseren Internet-Seiten zum Download angebotenen PDF-Dokumente benötigen Sie einen PDF-Reader bzw. PDF-Viewer oder einen aktuellen Browser, der die Ansicht von PDF-Dateien unterstützt. Die bekanntesten kostenlosen PDF-Reader für&nbsp;<strong>Windows</strong>&nbsp;sind zum Beispiel&nbsp;<a href="https://www.adobe.com/de/acrobat/pdf-reader.html?promoid=C4SZ2XDR&amp;mv=other" target="_blank">Adobe Acrobat Reader DC</a>,&nbsp;<a href="https://www.tracker-software.com/product/pdf-xchange-viewer" target="_blank">PDF-XChange Viewer</a>&nbsp;und&nbsp;<a href="https://www.foxit.com/de/pdf-reader/" target="_blank">Foxit Reader</a>, weitere Anbieter von PDF-Viewern und -Readern finden Sie in der ausführlichen&nbsp;<a href="https://de.wikipedia.org/wiki/Liste_von_PDF-Software" target="_blank">Wikipedia-Übersicht</a>. Für&nbsp;<strong>MAC OS X</strong>-Rechner finden Sie unter&nbsp;<a href="https://pdf.iskysoft.com/de/pdf-tips/pdf-reader-for-mac.html" target="_blank">https://pdf.iskysoft.com/de/pdf-tips/pdf-reader-for-mac.html</a>&nbsp;eine Auswahl an kostenlosen PDF-Readern.&nbsp;<strong>Linux</strong>-Anwender finden unter&nbsp;<a href="https://wiki.ubuntuusers.de/PDF/" target="_blank">https://wiki.ubuntuusers.de/PDF</a>&nbsp;eine Übersicht zu Linux-kompatiblen PDF-Readers.&nbsp;<strong>Smartphone</strong>- und&nbsp;<strong>Tablet</strong>-Benutzer schauen am besten im Apple App Store oder im Google Play Store nach dem passenden Reader für ihr Gerät.</p><p>Das Ausfüllen interaktiver Formulare im Browser wird aus Sicherheitsgründen nur eingeschränkt unterstützt. Daher ist in der Regel die Installation eines separaten PDF-Reader erforderlich. Es bieten jedoch nur wenige PDF-Reader zusätzlich komfortable Funktionen zum Ausfüllen von Formularen an, unterstützt wird diese Funktion zum Beispiel vom Adobe Acrobat DC, dem Foxit Reader oder dem&nbsp;<a href="https://wiki.ubuntuusers.de/Master_PDF_Editor/" target="_blank">Master PDF Editor</a>&nbsp;für Linux.</p><h2>Videodateien</h2><p>Filme können in unterschiedlichen Formaten abgespielt werden. Je nach eingesetztem Browser werden diese Videos direkt oder mittels eingebettetem Player (.flv, .wmv,.mpeg2 ) wiedergegeben. Neue Videoangebote werden ausschließlich im Format .mp4 und .webm zur Verfügung gestellt. Bei der Nutzung älterer Browser muss für das Abspielen der Videos, ggf. der Adobe Flash Player auf Ihrem PC installiert sein.<br><br>Über die entsprechende Schaltfläche des Browsers/Players können Sie vorhandene Untertitel ein- und ausblenden.</p><p>Stand: 05.12.2022</p></div></article></div></main>
+
+
+
+<body>
+<!--COPYRIGHT-->
+<div class="footer-corporate-inset">
+          <div class="container">
+            <div class="row row-40 justify-content-lg-between">
+              <div class="col-sm-6 col-md-12 col-lg-3 col-xl-4">
+                <div class="oh-desktop">
+                  <div class="wow slideInRight" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s; animation-name: slideInRight;">
+                    <h6 class="text-spacing-100 text-uppercase">Contact us</h6>
+                    <ul class="footer-contacts d-inline-block d-sm-block">
+                      <li>
+                        <div class="unit">
+                          <div class="unit-left"><span class="icon fa fa-phone"></span></div>
+                          <div class="unit-body"><a class="link-phone" href="tel:#">+39 999-1111-8888</a></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="unit">
+                          <div class="unit-left"><span class="icon fa fa-envelope"></span></div>
+                          <div class="unit-body"><a class="link-aemail" href="mailto:#">info@mywebsite.org</a></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="unit">
+                          <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
+                          <div class="unit-body"><a class="link-location" href="https://www.google.com/maps/place/Ukraine/data=!4m2!3m1!1s0x40d1d9c154700e8f:0x1068488f64010?sa=X&ved=2ahUKEwjkoqSc6cf9AhVw7LsIHaKiCEMQ8gF6BAhnEAE"> Ukraine </a></div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+
+        </div>
+
+
+
+<div class="footer-corporate-bottom-panel">
+          <div class="container">
+            <div class="row justfy-content-xl-space-berween row-10 align-items-md-center2">
+              <div class="col-sm-6 col-md-4 text-sm-right text-md-center">
+                <div>
+                  <ul class="list-inline list-inline-sm footer-social-list-2">
+                    <li><a class="icon fa fa-facebook" href="https://www.facebook.com/profile.php?id=100010511734820"></a></li>
+                    <li><a class="icon fa fa-twitter" href="https://twitter.com/?lang=de"></a></li>
+                    <li><a class="icon fa fa-google-plus" href="https://www.google.com/webhp?tab=rw&authuser=0"></a></li>
+                    <li><a class="icon fa fa-instagram" href="https://www.instagram.com/volodymyr_mbf/"></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4 order-sm-first">
+                <!-- Rights-->
+                <p class="rights"><span>©&nbsp;</span><span class="copyright-year">2023</span><span>&nbsp;</span> All Rights Reserved. Design by <a href="https://www.templatemonster.com">Volodymyr Bohatyrchuk</a></p>
+              </div>
+              <div class="col-sm-6 col-md-4 text-md-right">
+              </div>
+            </div>
+          </div>
+        </div>
+</html>
